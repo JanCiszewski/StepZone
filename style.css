@@ -1,5 +1,7 @@
 :root {
   --bggradient: linear-gradient(to bottom, #cf2525, #ad1b1b);
+  --bgdark: linear-gradient(to bottom, #5e5d5d, #313131);
+  --bgdarkproduct: rgba(73, 72, 72, 0.9);
 }
 
 * {
@@ -29,6 +31,23 @@ section {
 
 .hero {
   background: var(--bggradient);
+  position: relative;
+  transition: none;
+  z-index: 1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bgdark);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.hero:has(#darkmode:checked)::before {
+    opacity: 1;
 }
 
 .hero h1 {
@@ -36,9 +55,45 @@ section {
     font-size: 4rem;
 }
 
+.hero h1,.hero p,.hero a {
+  z-index: 1;
+}
+
+.dark-theme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(97, 3, 3, 0.7);
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.dark-theme:has(#darkmode:checked){
+  background-color: rgba(61, 61, 61, 0.7);
+}
+
+/* .dark-theme #darkmode {
+  outline: none;
+  border: 1px solid red;
+  background-color: aqua;
+} */
+
 .funkcje {
   background: var(--bggradient);
   flex-direction: row;
+}
+
+.hero:has(#darkmode:checked) ~ .funkcje {
+  background: var(--bgdark);
+}
+
+.hero:has(#darkmode:checked) ~ .funkcje .products .products-list .product {
+  background: var(--bgdarkproduct);
 }
 
 .toggle-filters {
@@ -79,7 +134,7 @@ section {
     align-items: start;
     gap: 0.7rem;
     font-weight: bold;
-    width: 90%;
+    width: 100%;
     padding: 1rem;
     border-radius: 5px;
 }
@@ -99,7 +154,7 @@ section {
     align-items: start;
     gap: 0.7rem;
     margin: 1rem 0;
-    width: 90%;
+    width: 100%;
     padding: 1rem;
     border-radius: 5px;
 }
@@ -185,7 +240,7 @@ section {
 }
 
 
-@media (max-width: 430px) {
+@media (max-width: 530px) {
   .products-list {
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 0.8rem;
