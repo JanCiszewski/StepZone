@@ -67,21 +67,51 @@ section {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: rgba(97, 3, 3, 0.7);
   padding: 0.4rem 0.8rem;
   border-radius: 10px;
   transition: background-color 0.3s;
 }
 
-.dark-theme:has(#darkmode:checked){
-  background-color: rgba(61, 61, 61, 0.7);
+.switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background-color: #752020;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  font-size: 0.9rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* .dark-theme #darkmode {
-  outline: none;
-  border: 1px solid red;
-  background-color: aqua;
-} */
+.thumb {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: rgb(255, 255, 255);
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+  transition: transform 0.3s ease;
+  z-index: 3;
+}
+
+.dark-theme input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked + .switch {
+  background-color: #333;
+}
+
+input[type="checkbox"]:checked + .switch .thumb {
+  transform: translateX(30px);
+  background-color: #979693;
+}
 
 .funkcje {
   background: var(--bggradient);
